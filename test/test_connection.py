@@ -198,6 +198,11 @@ class TestConnection:
         # Assert no error is raised
         _match_hostname(cert, asserted_hostname)
 
+    @pytest.mark.skip(
+        reason="RECENT_DATE (2023-06-01) must sit inside a rolling two-year window; "
+        "rebuilding the 2.2.1 release long after its release date always fails this "
+        "clock check, which asserts nothing about urllib3 behavior"
+    )
     def test_recent_date(self) -> None:
         # This test is to make sure that the RECENT_DATE value
         # doesn't get too far behind what the current date is.
